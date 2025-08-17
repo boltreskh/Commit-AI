@@ -1,0 +1,13 @@
+# Dependências de desenvolvimento
+pytest>=7.0.0
+pytest-cov>=4.0.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.0.0
+
+# Dependências de produção (do requirements.txt)
+requests>=2.31.0
+openai>=1.0.0
+python-dotenv>=1.0.0
+click>=8.1.0
+gitpython>=3.1.40

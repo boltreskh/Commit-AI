@@ -171,11 +171,15 @@ Commit-AI/
 
 ## 🤝 Contribuindo
 
+Contribuições são bem-vindas! Para contribuir:
+
 1. Fork o projeto
 2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+3. Commit suas mudanças usando o próprio Commit-AI! 😉
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
+
+**Desenvolvido por:** boltreskh (lucascanluz@gmail.com)
 
 ## 📝 Licença
 
@@ -196,4 +200,6 @@ Se encontrar problemas ou tiver sugestões:
 
 ---
 
-**Desenvolvido com ❤️ e IA para desenvolvedores que querem commits melhores!**
+**Desenvolvido com ❤️ e IA por boltreskh para desenvolvedores que querem commits melhores!**
+
+📧 Contato: lucascanluz@gmail.com

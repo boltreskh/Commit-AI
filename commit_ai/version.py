@@ -1,58 +1,46 @@
 #!/usr/bin/env python3
-"""
-Sistem    "1.2.0": {
-        "claude_support": "✅ Completo",
-        "ollama_support": "✅ Completo", 
-        "custom_templates": "✅ Completo",
-        "template_cli": "✅ Completo",
-        "diff_analysis": "✅ Completo",
-        "template_import_export": "✅ Completo",
-        "modular_ai_service": "✅ Completo",
-        "git_hooks": "📋 Planejado",controle de versão do Commit-AI
-Mantém sincronizadas as versões em todos os arquivos do projeto
-"""
+"""Sistema de controle de versão do Commit-AI"""
 
+# Versão atual do projeto
 VERSION = "1.2.0"
-VERSION_DATE = "2025-08-17"
-VERSION_NAME = "Providers & Templates"
+VERSION_DATE = "17/08/2025"
+VERSION_NAME = "Providers & Templates" 
+VERSION_INFO = "Sistema completo de múltiplos provedores AI e templates personalizados"
 
-# Metadata da versão
-VERSION_INFO = {
-    "major": 1,
-    "minor": 2, 
-    "patch": 0,
-    "pre_release": None,
-    "build": None
-}
-
-# Status das funcionalidades por versão
+# Status das funcionalidades por versão (usando texto simples para compatibilidade)
 FEATURES_STATUS = {
     "1.0.0": {
-        "ai_integration": "✅ Completo",
-        "cli_basic": "✅ Completo", 
-        "git_operations": "✅ Completo",
-        "multi_providers": "✅ Completo"
+        "basic_ai_commit": "[OK] Completo",
+        "openai_integration": "[OK] Completo", 
+        "gemini_integration": "[OK] Completo",
+        "cli_interface": "[OK] Completo",
+        "git_operations": "[OK] Completo",
+        "multi_providers": "[OK] Completo"
     },
     "1.1.0": {
-        "cache_system": "✅ Completo",
-        "persistent_config": "✅ Completo", 
-        "structured_logging": "✅ Completo",
-        "automated_tests": "✅ Completo",
-        "cache_management": "✅ Completo",
-        "robust_validation": "✅ Completo"
+        "cache_system": "[OK] Completo",
+        "persistent_config": "[OK] Completo", 
+        "structured_logging": "[OK] Completo",
+        "automated_tests": "[OK] Completo",
+        "cache_management": "[OK] Completo",
+        "robust_validation": "[OK] Completo"
     },
     "1.2.0": {
-        "claude_support": "� Em desenvolvimento",
-        "ollama_support": "� Em desenvolvimento",
-        "custom_templates": "� Em desenvolvimento",
-        "git_hooks": "📋 Planejado",
-        "enhanced_prompts": "� Em desenvolvimento"
+        "claude_support": "[OK] Completo",
+        "ollama_support": "[OK] Completo", 
+        "custom_templates": "[OK] Completo",
+        "template_cli": "[OK] Completo",
+        "diff_analysis": "[OK] Completo",
+        "template_import_export": "[OK] Completo",
+        "modular_ai_service": "[OK] Completo",
+        "enhanced_prompts": "[OK] Completo",
+        "git_hooks": "[PLAN] Planejado"
     },
     "1.3.0": {
-        "tui_interface": "📋 Planejado",
-        "syntax_highlighting": "📋 Planejado",
-        "code_analysis": "📋 Planejado",
-        "config_wizard": "📋 Planejado"
+        "tui_interface": "[PLAN] Planejado",
+        "syntax_highlighting": "[PLAN] Planejado",
+        "code_analysis": "[PLAN] Planejado",
+        "config_wizard": "[PLAN] Planejado"
     }
 }
 
@@ -65,35 +53,15 @@ ROADMAP = {
             "Suporte Anthropic Claude",
             "Suporte Ollama local", 
             "Templates personalizáveis",
-            "Git hooks integration"
+            "CLI de gerenciamento de templates"
         ]
     },
     "1.3.0": {
         "quarter": "Q1 2026", 
-        "theme": "UX e Interface Aprimorados",
+        "theme": "Interface e Automação",
         "features": [
-            "TUI interativa",
-            "Preview melhorado",
-            "Análise contextual de código"
-        ]
-    },
-    "1.4.0": {
-        "quarter": "Q2 2026",
-        "theme": "Integrações e Ferramentas",  
-        "features": [
-            "Plugin VS Code",
-            "Extensão JetBrains",
-            "GitHub CLI integration"
-        ]
-    },
-    "2.0.0": {
-        "quarter": "Q3 2026",
-        "theme": "Versão Empresarial",
-        "features": [
-            "GUI multiplataforma",
-            "CI/CD integration", 
-            "Analytics avançado",
-            "IA personalizada"
+            "Git hooks automáticos",
+            "Interface texto melhorada"
         ]
     }
 }
@@ -108,7 +76,9 @@ def get_version_info():
         "version": VERSION,
         "date": VERSION_DATE, 
         "name": VERSION_NAME,
-        "info": VERSION_INFO
+        "info": VERSION_INFO,
+        "features": FEATURES_STATUS,
+        "roadmap": ROADMAP
     }
 
 def get_features_status(version=None):
@@ -117,18 +87,24 @@ def get_features_status(version=None):
         return FEATURES_STATUS.get(version, {})
     return FEATURES_STATUS
 
-def get_roadmap():
-    """Retorna o roadmap completo"""
-    return ROADMAP
+def get_version_summary():
+    """Retorna um resumo da versão atual"""
+    features = FEATURES_STATUS.get(VERSION, {})
+    total = len(features)
+    completed = len([f for f in features.values() if "[OK]" in f])
+    
+    return {
+        "version": VERSION,
+        "name": VERSION_NAME,
+        "date": VERSION_DATE,
+        "total_features": total,
+        "completed_features": completed,
+        "completion_rate": f"{(completed/total*100):.1f}%" if total > 0 else "0%"
+    }
 
 if __name__ == "__main__":
-    print(f"Commit-AI v{VERSION} ({VERSION_NAME})")
-    print(f"Lançado em: {VERSION_DATE}")
-    print("\n🎯 Funcionalidades desta versão:")
-    for feature, status in FEATURES_STATUS.get(VERSION, {}).items():
-        print(f"  {status} {feature.replace('_', ' ').title()}")
+    print(f"Commit-AI v{VERSION} - {VERSION_NAME}")
+    print(f"Data: {VERSION_DATE}")
     
-    print(f"\n🚀 Próxima versão: {list(ROADMAP.keys())[0]}")
-    next_version = list(ROADMAP.values())[0]
-    print(f"  📅 Planejado para: {next_version['quarter']}")
-    print(f"  🎨 Tema: {next_version['theme']}")
+    summary = get_version_summary()
+    print(f"Status: {summary['completed_features']}/{summary['total_features']} funcionalidades ({summary['completion_rate']})")

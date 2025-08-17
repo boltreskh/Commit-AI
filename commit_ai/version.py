@@ -49,18 +49,21 @@ FEATURES_STATUS = {
         "hooks_documentation": "[OK] Documentação completa dos hooks"
     },
     "1.4.0": {
-        "interactive_tui": "[DEV] Terminal UI interativa com seleção visual",
-        "syntax_highlighting": "[DEV] Preview com destaque de sintaxe", 
-        "configuration_wizard": "[DEV] Wizard de configuração inicial",
-        "advanced_analytics": "[PLAN] Dashboards de produtividade e métricas",
-        "commit_patterns": "[PLAN] Análise de padrões de commits",
-        "team_insights": "[PLAN] Insights colaborativos por equipe",
-        "plugin_system": "[PLAN] Sistema de plugins extensível",
-        "custom_providers": "[PLAN] Suporte a provedores customizados",
-        "performance_metrics": "[DEV] Métricas de performance e tempo",
-        "export_reports": "[PLAN] Exportação de relatórios em PDF/HTML",
-        "integration_apis": "[PLAN] APIs para integrações externas",
-        "theme_system": "[DEV] Sistema de temas para interface"
+        "interactive_tui": "[OK] Terminal UI interativa com Rich library",
+        "syntax_highlighting": "[OK] Preview com destaque de sintaxe",
+        "multiple_options": "[OK] Seleção entre múltiplas opções de commit", 
+        "configuration_wizard": "[OK] Wizard de configuração passo-a-passo",
+        "advanced_analytics": "[OK] Dashboards de produtividade e métricas SQLite",
+        "commit_patterns": "[OK] Análise de padrões temporais de commits",
+        "team_insights": "[OK] Insights colaborativos e score de equipe",
+        "plugin_system": "[OK] Framework extensível de plugins",
+        "custom_providers": "[OK] Plugin de exemplo Custom Local AI",
+        "performance_metrics": "[OK] Métricas de performance e tempo de processamento",
+        "export_reports": "[OK] Exportação de relatórios JSON/CSV/texto",
+        "plugin_management": "[OK] CLI completo de gerenciamento de plugins",
+        "theme_system": "[OK] Sistema de temas para interface TUI",
+        "fallback_support": "[OK] Fallback gracioso para terminais básicos",
+        "hot_loading": "[OK] Carregamento dinâmico de plugins"
     }
 }
 
@@ -68,30 +71,59 @@ FEATURES_STATUS = {
 ROADMAP = {
     "1.2.0": {
         "quarter": "Q4 2025",
+        "status": "✅ CONCLUÍDO",
         "theme": "Expansão de Providers e Templates",
         "features": [
-            "Suporte Anthropic Claude",
-            "Suporte Ollama local", 
-            "Templates personalizáveis",
-            "CLI de gerenciamento de templates"
+            "✅ Suporte Anthropic Claude",
+            "✅ Suporte Ollama local", 
+            "✅ Templates personalizáveis",
+            "✅ CLI de gerenciamento de templates"
         ]
     },
     "1.3.0": {
         "quarter": "Q1 2026", 
+        "status": "✅ CONCLUÍDO",
         "theme": "Interface e Automação",
         "features": [
-            "Git hooks automáticos",
-            "Interface texto melhorada"
+            "✅ Git hooks automáticos completos",
+            "✅ CLI de gerenciamento de hooks",
+            "✅ Sistema de analytics via hooks"
         ]
     },
     "1.4.0": {
         "quarter": "Q2 2026",
+        "status": "✅ CONCLUÍDO",
         "theme": "Interface Avançada e Analytics", 
         "features": [
-            "Terminal UI (TUI) interativa",
-            "Analytics e dashboards avançados",
-            "Sistema de plugins",
-            "Wizard de configuração"
+            "✅ Terminal UI (TUI) interativa com Rich",
+            "✅ Analytics e dashboards avançados SQLite",
+            "✅ Sistema de plugins extensível",
+            "✅ Wizard de configuração interativo",
+            "✅ Framework completo de métricas"
+        ]
+    },
+    "1.5.0": {
+        "quarter": "Q1 2026",
+        "status": "🔄 PRÓXIMO",
+        "theme": "Interface Gráfica e Colaboração",
+        "features": [
+            "🖥️ Interface gráfica desktop (GUI)",
+            "🔗 Integração com IDEs (VS Code, JetBrains)",
+            "☁️ Sincronização em nuvem de configurações",
+            "🤝 Recursos colaborativos avançados",
+            "📱 Interface web para configuração"
+        ]
+    },
+    "2.0.0": {
+        "quarter": "Q2 2026",
+        "status": "🎯 PLANEJADO",
+        "theme": "Versão Empresarial",
+        "features": [
+            "🌐 Marketplace de plugins comunitários",
+            "🔐 Recursos enterprise e compliance", 
+            "🧠 Machine Learning personalizado",
+            "📊 Análise preditiva de commits",
+            "👥 Gerenciamento de equipes"
         ]
     }
 }

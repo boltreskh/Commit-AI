@@ -8,6 +8,7 @@ Este é o ponto de entrada principal da aplicação CLI.
 import os
 import sys
 import subprocess
+from .version import VERSION
 import click
 from dotenv import load_dotenv
 from .git_handler import GitHandler
@@ -118,7 +119,7 @@ def main(api, model, max_tokens, temperature, preview, auto, verbose, no_cache, 
                 click.echo(click.style("❌ Formato inválido. Use: --config chave=valor", fg='red'))
                 sys.exit(1)
         
-        logger.info(f"Iniciando Commit-AI v{config_manager.get('version', '1.1.0')}")
+        logger.info(f"Iniciando Commit-AI v{VERSION}")
         logger.debug(f"Configurações: api={api}, model={model}, temperature={temperature}")
         
         # Validação de parâmetros

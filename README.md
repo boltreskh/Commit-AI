@@ -302,17 +302,71 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 
 ## 🎯 Roadmap
 
-### v1.2.0 (Próxima versão)
-- [ ] Sistema de cache para respostas da IA
-- [ ] Suporte para mais provedores (Claude, Ollama)
-- [ ] Templates de commit personalizáveis
-- [ ] Integração com hooks do Git
+### ✅ v1.1.0 (Implementado - 17/08/2025)
+- [x] **Sistema de cache SQLite inteligente** - Cache baseado em hash com controle de expiração
+- [x] **Configurações persistentes** - Sistema de config JSON em ~/.commit-ai/
+- [x] **Logging estruturado** - Logs detalhados em console e arquivo
+- [x] **Suite de testes automatizados** - pytest + coverage completo
+- [x] **CLI aprimorado** - Modo verbose, cache-stats, validação robusta
+- [x] **Cache management CLI** - Ferramentas para gerenciar cache
 
-### v2.0.0 (Futuro)
-- [ ] Interface gráfica opcional
-- [ ] Análise semântica avançada do código
-- [ ] Integração com CI/CD
-- [ ] Plugin para VS Code
+### 🚀 v1.2.0 (Em planejamento - Q4 2025)
+- [ ] **Suporte para mais provedores de IA**
+  - [ ] Anthropic Claude (claude-3-sonnet, claude-3-haiku)
+  - [ ] Ollama local (llama3, codellama, mistral)
+  - [ ] Cohere Command
+- [ ] **Templates de commit personalizáveis**
+  - [ ] Sistema de templates com variáveis
+  - [ ] Templates por tipo de projeto (feat, fix, docs, etc.)
+  - [ ] Import/export de templates
+- [ ] **Integração avançada com Git**
+  - [ ] Git hooks automáticos (pre-commit, commit-msg)
+  - [ ] Análise de branch e contexto do PR
+  - [ ] Sugestões baseadas em histórico de commits
+
+### 🎨 v1.3.0 (Q1 2026)
+- [ ] **Interface e UX melhorados**
+  - [ ] TUI (Terminal UI) interativa com seleção visual
+  - [ ] Preview com syntax highlighting
+  - [ ] Wizard de configuração inicial
+- [ ] **Análise de código aprimorada**
+  - [ ] Detecção de linguagem de programação
+  - [ ] Context awareness por tipo de arquivo
+  - [ ] Análise de dependências modificadas
+
+### 🔧 v1.4.0 (Q2 2026)
+- [ ] **Integração com ferramentas de desenvolvimento**
+  - [ ] Plugin para VS Code
+  - [ ] Extensão para JetBrains IDEs
+  - [ ] Integração com GitHub CLI
+- [ ] **Recursos colaborativos**
+  - [ ] Templates compartilhados por equipe
+  - [ ] Consistency checks entre desenvolvedores
+  - [ ] Estatísticas de usage por projeto
+
+### 🏢 v2.0.0 (Q3 2026) - Versão Empresarial
+- [ ] **Interface gráfica multiplataforma**
+  - [ ] GUI desktop (Electron/Tauri)
+  - [ ] Web interface para configuração
+  - [ ] Mobile app para review
+- [ ] **Recursos empresariais**
+  - [ ] Integração com CI/CD (GitHub Actions, GitLab, Jenkins)
+  - [ ] Analytics e relatórios de commit quality
+  - [ ] Compliance e audit trails
+- [ ] **IA avançada**
+  - [ ] Fine-tuning em código da empresa
+  - [ ] Análise semântica de mudanças
+  - [ ] Sugestões de refactoring baseadas em commits
+
+### 🔮 Futuro (v2.1.0+)
+- [ ] **Machine Learning personalizado**
+  - [ ] Modelo treinado no estilo de commits da equipe
+  - [ ] Predição de impacto de mudanças
+  - [ ] Auto-categorização de commits
+- [ ] **Integrações avançadas**
+  - [ ] Jira/Linear ticket linking
+  - [ ] Slack/Teams notifications
+  - [ ] Code review automation
 
 ## 📞 Suporte
 

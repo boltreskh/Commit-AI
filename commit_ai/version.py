@@ -2,10 +2,10 @@
 """Sistema de controle de versão do Commit-AI"""
 
 # Versão atual do projeto
-VERSION = "1.3.0"
+VERSION = "1.4.0"
 VERSION_DATE = "17/08/2025"
-VERSION_NAME = "Interface e Automação" 
-VERSION_INFO = "Git hooks automáticos, interface aprimorada e automação avançada"
+VERSION_NAME = "Interface Avançada e Analytics" 
+VERSION_INFO = "TUI interativa, analytics avançados, dashboards e plugins"
 
 # Status das funcionalidades por versão (usando texto simples para compatibilidade)
 FEATURES_STATUS = {
@@ -37,19 +37,30 @@ FEATURES_STATUS = {
         "git_hooks": "[PLAN] Planejado"
     },
     "1.3.0": {
-        "git_hooks": "[DEV] Em desenvolvimento",
-        "pre_commit_hook": "[DEV] Em desenvolvimento",
-        "commit_msg_hook": "[DEV] Em desenvolvimento",
-        "enhanced_tui": "[PLAN] Planejado",
-        "syntax_highlighting": "[PLAN] Planejado",
-        "interactive_staging": "[PLAN] Planejado",
-        "commit_templates_ui": "[PLAN] Planejado",
-        "config_wizard": "[PLAN] Planejado"
+        "git_hooks_system": "[OK] Sistema completo de Git Hooks",
+        "pre_commit_hook": "[OK] Hook de análise pré-commit",
+        "commit_msg_hook": "[OK] Hook de validação de mensagens",
+        "post_commit_hook": "[OK] Hook de analytics pós-commit",
+        "hooks_cli": "[OK] CLI de gerenciamento de hooks",
+        "hooks_config": "[OK] Sistema de configuração de hooks",
+        "auto_improve": "[OK] Auto-melhoria de mensagens via IA",
+        "hooks_testing": "[OK] Suite de testes para hooks",
+        "hooks_health": "[OK] Verificação de integridade dos hooks",
+        "hooks_documentation": "[OK] Documentação completa dos hooks"
     },
     "1.4.0": {
-        "vscode_extension": "[PLAN] Planejado",
-        "jetbrains_plugin": "[PLAN] Planejado",
-        "github_cli_integration": "[PLAN] Planejado"
+        "interactive_tui": "[DEV] Terminal UI interativa com seleção visual",
+        "syntax_highlighting": "[DEV] Preview com destaque de sintaxe", 
+        "configuration_wizard": "[DEV] Wizard de configuração inicial",
+        "advanced_analytics": "[PLAN] Dashboards de produtividade e métricas",
+        "commit_patterns": "[PLAN] Análise de padrões de commits",
+        "team_insights": "[PLAN] Insights colaborativos por equipe",
+        "plugin_system": "[PLAN] Sistema de plugins extensível",
+        "custom_providers": "[PLAN] Suporte a provedores customizados",
+        "performance_metrics": "[DEV] Métricas de performance e tempo",
+        "export_reports": "[PLAN] Exportação de relatórios em PDF/HTML",
+        "integration_apis": "[PLAN] APIs para integrações externas",
+        "theme_system": "[DEV] Sistema de temas para interface"
     }
 }
 
@@ -71,6 +82,16 @@ ROADMAP = {
         "features": [
             "Git hooks automáticos",
             "Interface texto melhorada"
+        ]
+    },
+    "1.4.0": {
+        "quarter": "Q2 2026",
+        "theme": "Interface Avançada e Analytics", 
+        "features": [
+            "Terminal UI (TUI) interativa",
+            "Analytics e dashboards avançados",
+            "Sistema de plugins",
+            "Wizard de configuração"
         ]
     }
 }

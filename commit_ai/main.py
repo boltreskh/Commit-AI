@@ -304,12 +304,45 @@ def commit(api, model, max_tokens, temperature, preview, auto, verbose, no_cache
         sys.exit(1)
 
 
+@cli.command()
+@click.option('--simple', is_flag=True, help='Usar interface simplificada (sem Rich)')
+def setup(simple):
+    """🔧 Wizard de configuração inicial"""
+    try:
+        from .config_wizard import run_configuration_wizard
+        
+        if simple:
+            # Forçar modo simples
+            import os
+            os.environ['FORCE_SIMPLE_WIZARD'] = '1'
+        
+        success = run_configuration_wizard()
+        
+        if success:
+            click.echo(click.style("✅ Configuração concluída com sucesso!", fg='green'))
+        else:
+            click.echo(click.style("❌ Configuração não foi concluída.", fg='red'))
+            sys.exit(1)
+            
+    except ImportError as e:
+        click.echo(click.style(f"❌ Erro de importação: {e}", fg='red'))
+        click.echo("Execute 'pip install rich' para interface aprimorada.")
+        sys.exit(1)
+    except Exception as e:
+        click.echo(click.style(f"❌ Erro inesperado: {e}", fg='red'))
+        sys.exit(1)
+
+
 # Adiciona o CLI de templates como subgrupo
 cli.add_command(template_cli, name='template')
 
 # Adiciona o CLI de hooks como subgrupo
 from .hooks_cli import hooks_cli
 cli.add_command(hooks_cli, name='hooks')
+
+# Adiciona o CLI de plugins como subgrupo (v1.4.0)
+from .plugins_cli import plugins_cli
+cli.add_command(plugins_cli, name='plugins')
 
 # Função main para compatibilidade
 def main():

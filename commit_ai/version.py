@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 """
-Sistema de controle de versão do Commit-AI
+Sistem    "1.2.0": {
+        "claude_support": "✅ Completo",
+        "ollama_support": "✅ Completo", 
+        "custom_templates": "✅ Completo",
+        "template_cli": "✅ Completo",
+        "diff_analysis": "✅ Completo",
+        "template_import_export": "✅ Completo",
+        "modular_ai_service": "✅ Completo",
+        "git_hooks": "📋 Planejado",controle de versão do Commit-AI
 Mantém sincronizadas as versões em todos os arquivos do projeto
 """
 

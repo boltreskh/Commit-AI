@@ -5,6 +5,50 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-08-17
+
+### ✨ Adicionado
+- **Suporte a múltiplos provedores de IA**
+  - Anthropic Claude (claude-3-haiku, claude-3-sonnet, claude-3-opus)
+  - Ollama local (llama2, codellama, mistral, e outros modelos open-source)
+  - Arquitetura modular expandida no `ai_service.py`
+  - Detecção automática de disponibilidade de provedores
+- **Sistema completo de templates personalizado** (`templates.py`)
+  - 8 templates padrão: feat, fix, docs, style, refactor, test, chore, perf
+  - Criação e gerenciamento de templates customizados
+  - Persistência em JSON com configuração flexível
+  - Análise inteligente de diff para sugestão automática de tipos
+- **CLI de gerenciamento de templates** (`template_cli.py`)
+  - `commit-ai template list` - Lista todos os templates disponíveis
+  - `commit-ai template add` - Adiciona templates personalizados
+  - `commit-ai template remove` - Remove templates customizados
+  - `commit-ai template suggest` - Sugere tipo baseado no diff
+  - `commit-ai template generate` - Gera mensagem usando template
+  - `commit-ai template export/import` - Backup e restauração
+- **Execução como módulo Python** (`__main__.py`)
+  - Comando `python -m commit_ai` funcional
+  - Integração seamless com CLI principal
+- **Arquitetura CLI expandida**
+  - CLI principal transformado em grupo de comandos
+  - Subcomandos organizados e estruturados
+  - Compatibilidade total com versões anteriores
+
+### 🔧 Melhorado
+- **AIService expandido**
+  - Refatoração completa com método por provedor
+  - Tratamento de erros específico para cada API
+  - Integração nativa com sistema de templates
+  - Validação robusta de credenciais e modelos
+- **Sistema de prompt inteligente**
+  - Templates integrados na geração de prompts
+  - Análise de contexto baseada em diff
+  - Sugestões automáticas de escopo e tipo
+
+### 📦 Dependências
+- Adicionado `anthropic>=0.3.0` para suporte ao Claude
+- Adicionado `ollama>=0.1.0` para modelos locais
+- Atualização nas dependências do projeto
+
 ## [1.1.0] - 2025-08-17
 
 ### ✨ Adicionado

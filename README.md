@@ -1,17 +1,22 @@
-# 🤖 Commit-AI v1.1.0
+# 🤖 Commit-AI v1.2.0
 
-Um gerador inteligente de mensagens de commit Git usando IA (OpenAI GPT & Google Gemini).
+Um gerador inteligente de mensagens de commit Git usando IA com suporte a múltiplos provedores e templates personalizados.
 
 ## ✨ Funcionalidades
 
 ### Principais
 - **Geração automática de commits**: Analisa suas mudanças e gera mensagens profissionais
-- **Multi-provider IA**: Suporte para OpenAI GPT e Google Gemini
+- **4 Provedores de IA**: OpenAI GPT, Google Gemini, Anthropic Claude, Ollama Local
+- **Sistema de templates personalizado**: 8 templates padrão + criação de templates customizados
 - **Sistema de cache inteligente**: Evita requisições desnecessárias à IA
 - **Configuração persistente**: Salva suas preferências automaticamente
 - **Logs estruturados**: Sistema de logging completo para debug
 
-### Avançadas v1.1.0
+### Avançadas v1.2.0
+- **CLI de gerenciamento de templates**: Comandos para criar, modificar e gerenciar templates
+- **Análise inteligente de diff**: Sugestão automática de tipo de commit baseada nas mudanças
+- **Import/Export de templates**: Backup e compartilhamento de configurações
+- **Suporte a modelos locais**: Execute IA localmente com Ollama
 - **Sistema de configuração**: Configure suas preferências padrão
 - **Cache SQLite**: Cache inteligente com controle de expiração
 - **Modo verboso**: Debug detalhado de operações
@@ -168,21 +173,26 @@ python -m commit_ai.main --auto --temperature 0.5 --max-tokens 80
 ```
 Commit-AI/
 ├── commit_ai/
-│   ├── __init__.py          # Inicialização do pacote (v1.1.0)
-│   ├── main.py              # Ponto de entrada principal
+│   ├── __init__.py          # Inicialização do pacote (v1.2.0)
+│   ├── __main__.py          # 🆕 Execução como módulo
+│   ├── main.py              # Ponto de entrada principal (CLI expandido)
 │   ├── git_handler.py       # Operações do Git
-│   ├── ai_service.py        # Integração com APIs de IA
-│   ├── config_manager.py    # 🆕 Gerenciador de configurações
-│   └── logger.py            # 🆕 Sistema de logging
+│   ├── ai_service.py        # Integração com APIs de IA (4 provedores)
+│   ├── templates.py         # 🆕 Sistema de templates personalizado
+│   ├── template_cli.py      # 🆕 CLI de gerenciamento de templates
+│   ├── config_manager.py    # Gerenciador de configurações
+│   ├── version.py           # Sistema de versionamento centralizado
+│   └── logger.py            # Sistema de logging
 ├── tests/                   # 🆕 Testes automatizados
 │   └── test_git_handler.py  # Testes do GitHandler
 ├── requirements.txt         # Dependências de produção
 ├── requirements-dev.txt     # 🆕 Dependências de desenvolvimento
-├── pyproject.toml          # Configuração do projeto (v1.1.0)
-├── pytest.ini              # 🆕 Configuração de testes
-├── setup-dev.sh            # 🆕 Script de setup para desenvolvedores
+├── pyproject.toml          # Configuração do projeto (v1.2.0)
+├── pytest.ini              # Configuração de testes
+├── setup-dev.sh            # Script de setup para desenvolvedores
 ├── .env.example            # Exemplo de configuração
 ├── demo.py                 # Script de demonstração
+└── CHANGELOG_v1.2.0.md     # 🆕 Changelog da versão atual
 ├── LICENSE                 # Licença MIT
 └── README.md               # Este arquivo
 ```
@@ -271,6 +281,16 @@ Contribuições são bem-vindas! Para contribuir:
 
 ## 📈 Changelog
 
+### v1.2.0 (17/08/2025)
+- ✨ **NOVO**: Suporte a 4 provedores de IA (OpenAI, Gemini, Claude, Ollama)
+- ✨ **NOVO**: Sistema completo de templates personalizados (8 padrão + custom)
+- ✨ **NOVO**: CLI de gerenciamento de templates (`commit-ai template`)
+- ✨ **NOVO**: Análise inteligente de diff para sugestão de tipos
+- ✨ **NOVO**: Import/export de templates em JSON
+- ✨ **NOVO**: Execução como módulo (`python -m commit_ai`)
+- 🔧 **MELHORIA**: AIService expandido com arquitetura modular
+- 🔧 **MELHORIA**: Integração seamless entre templates e IA
+
 ### v1.1.0 (17/08/2025)
 - ✨ **NOVO**: Sistema de configuração persistente (`config_manager.py`)
 - ✨ **NOVO**: Sistema de logging estruturado (`logger.py`)
@@ -302,6 +322,19 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 
 ## 🎯 Roadmap
 
+### ✅ v1.2.0 (Implementado - 17/08/2025)
+- [x] **Suporte para mais provedores de IA**
+  - [x] Anthropic Claude (claude-3-sonnet, claude-3-haiku, claude-3-opus)
+  - [x] Ollama local (llama2, codellama, mistral, etc.)
+- [x] **Sistema de templates personalizados**
+  - [x] 8 templates padrão (feat, fix, docs, style, refactor, test, chore, perf)
+  - [x] Criação de templates customizados
+  - [x] Análise inteligente de diff para sugestão automática
+  - [x] Import/export de templates em JSON
+- [x] **CLI expandido**
+  - [x] Subcomandos para gerenciamento (`commit-ai template`)
+  - [x] Execução como módulo Python (`python -m commit_ai`)
+
 ### ✅ v1.1.0 (Implementado - 17/08/2025)
 - [x] **Sistema de cache SQLite inteligente** - Cache baseado em hash com controle de expiração
 - [x] **Configurações persistentes** - Sistema de config JSON em ~/.commit-ai/
@@ -310,9 +343,16 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 - [x] **CLI aprimorado** - Modo verbose, cache-stats, validação robusta
 - [x] **Cache management CLI** - Ferramentas para gerenciar cache
 
-### 🚀 v1.2.0 (Em planejamento - Q4 2025)
-- [ ] **Suporte para mais provedores de IA**
-  - [ ] Anthropic Claude (claude-3-sonnet, claude-3-haiku)
+### 🚀 v1.3.0 (Em planejamento - Q4 2025)
+- [ ] **Git Hooks automáticos**
+  - [ ] pre-commit hook para geração automática
+  - [ ] commit-msg hook para validação
+- [ ] **Interface gráfica (GUI)**
+  - [ ] Aplicativo desktop com Tkinter/PyQt
+  - [ ] Preview visual de mudanças
+- [ ] **Análise de padrões históricos**
+  - [ ] Aprendizado baseado em commits anteriores
+  - [ ] Sugestões personalizadas por projeto
   - [ ] Ollama local (llama3, codellama, mistral)
   - [ ] Cohere Command
 - [ ] **Templates de commit personalizáveis**

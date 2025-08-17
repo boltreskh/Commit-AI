@@ -24,9 +24,15 @@ load_dotenv()
 config_manager = ConfigManager()
 
 @click.group(invoke_without_command=True)
+@click.option('--version', is_flag=True, help='Mostrar versão do Commit-AI')
 @click.pass_context
-def cli(ctx):
+def cli(ctx, version):
     """🤖 Commit-AI: Gerador de mensagens de commit usando IA"""
+    if version:
+        from .version import VERSION, VERSION_NAME
+        click.echo(f"Commit-AI v{VERSION} - {VERSION_NAME}")
+        return
+    
     if ctx.invoked_subcommand is None:
         # Se nenhum subcomando foi chamado, executa a funcionalidade principal
         ctx.invoke(commit)
@@ -300,6 +306,10 @@ def commit(api, model, max_tokens, temperature, preview, auto, verbose, no_cache
 
 # Adiciona o CLI de templates como subgrupo
 cli.add_command(template_cli, name='template')
+
+# Adiciona o CLI de hooks como subgrupo
+from .hooks_cli import hooks_cli
+cli.add_command(hooks_cli, name='hooks')
 
 # Função main para compatibilidade
 def main():

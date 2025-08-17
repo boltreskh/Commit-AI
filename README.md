@@ -1,6 +1,6 @@
-# 🤖 Commit-AI v1.2.0
+# 🤖 Commit-AI v1.3.0
 
-Um gerador inteligente de mensagens de commit Git usando IA com suporte a múltiplos provedores e templates personalizados.
+Um gerador inteligente de mensagens de commit Git usando IA com suporte a múltiplos provedores, templates personalizados e automação via Git Hooks.
 
 ## ✨ Funcionalidades
 
@@ -22,6 +22,16 @@ Um gerador inteligente de mensagens de commit Git usando IA com suporte a múlti
 - **Modo verboso**: Debug detalhado de operações
 - **Estatísticas de cache**: Visualize métricas de uso do cache
 - **Validação robusta**: Verificação de parâmetros e API keys
+
+### 🆕 NOVIDADES v1.3.0 - Interface e Automação
+- **Git Hooks Automáticos**: Integração completa com workflow Git
+- **Pre-commit Hook**: Análise automática e sugestão de tipos de commit
+- **Commit-msg Hook**: Validação e melhoria automática de mensagens
+- **Post-commit Hook**: Analytics e coleta de métricas de projeto
+- **CLI de Hooks**: Gerenciamento completo via comando `commit-ai hooks`
+- **Auto-melhoria**: Melhoria automática de mensagens durante commit
+- **Sistema de Saúde**: Monitoramento da integridade dos hooks
+- **Configuração Flexível**: Habilitar/desabilitar hooks individualmente
 
 ## 🚀 Instalação
 
@@ -130,13 +140,84 @@ python -m commit_ai.main --max-tokens 50
 
 ```bash
 # Uso padrão com OpenAI GPT-4
-python -m commit_ai.main
+python -m commit_ai
 
 # Preview com Gemini
-python -m commit_ai.main --api gemini --preview
+python -m commit_ai --api gemini --preview
 
 # Commit automático com configuração personalizada
-python -m commit_ai.main --auto --temperature 0.5 --max-tokens 80
+python -m commit_ai --auto --temperature 0.5 --max-tokens 80
+
+# Gerenciar templates
+python -m commit_ai template list
+python -m commit_ai template set conventional
+
+# Instalar e gerenciar Git Hooks (v1.3.0)
+python -m commit_ai hooks install --all
+python -m commit_ai hooks config --auto-improve
+python -m commit_ai hooks status
+```
+
+## 🔗 Git Hooks (v1.3.0)
+
+### Instalação de Hooks
+
+```bash
+# Instalar todos os hooks automaticamente
+commit-ai hooks install --all
+
+# Instalar hooks específicos
+commit-ai hooks install --hook pre-commit --hook commit-msg
+
+# Verificar status dos hooks
+commit-ai hooks status
+
+# Testar funcionamento de um hook
+commit-ai hooks test pre-commit
+```
+
+### Configuração de Hooks
+
+```bash
+# Ver configurações atuais
+commit-ai hooks config
+
+# Habilitar auto-melhoria de mensagens
+commit-ai hooks config --auto-improve
+
+# Habilitar/desabilitar hooks
+commit-ai hooks config --enable
+commit-ai hooks config --disable
+```
+
+### Funcionamento dos Hooks
+
+#### Pre-commit Hook
+- **Ativação**: Executado automaticamente no `git commit`
+- **Funcionalidade**: Analisa alterações e sugere tipo de commit
+- **Saída**: Exibe sugestão de tipo (feat, fix, docs, etc.) com nível de confiança
+
+#### Commit-msg Hook
+- **Ativação**: Executado após edição da mensagem de commit
+- **Funcionalidade**: Valida formato e melhora mensagem automaticamente
+- **Auto-melhoria**: Se habilitado, usa IA para melhorar mensagens ruins
+
+#### Post-commit Hook
+- **Ativação**: Executado após commit bem-sucedido
+- **Funcionalidade**: Coleta analytics e métricas do projeto
+- **Analytics**: Padrões de commit, produtividade, sugestões
+
+### Desinstalação de Hooks
+
+```bash
+# Remover hook específico
+commit-ai hooks uninstall --hook pre-commit
+
+# Remover todos os hooks
+commit-ai hooks uninstall --all
+
+# Ver logs dos hooks
+commit-ai hooks logs --lines 10
 ```
 
 ## 📖 Como Funciona
@@ -174,25 +255,30 @@ python -m commit_ai.main --auto --temperature 0.5 --max-tokens 80
 Commit-AI/
 ├── commit_ai/
 │   ├── __init__.py          # Inicialização do pacote (v1.2.0)
-│   ├── __main__.py          # 🆕 Execução como módulo
+│   ├── __main__.py          # Execução como módulo
 │   ├── main.py              # Ponto de entrada principal (CLI expandido)
 │   ├── git_handler.py       # Operações do Git
 │   ├── ai_service.py        # Integração com APIs de IA (4 provedores)
-│   ├── templates.py         # 🆕 Sistema de templates personalizado
-│   ├── template_cli.py      # 🆕 CLI de gerenciamento de templates
+│   ├── templates.py         # Sistema de templates personalizado
+│   ├── template_cli.py      # CLI de gerenciamento de templates
+│   ├── git_hooks.py         # 🆕 Sistema de Git Hooks automáticos (v1.3.0)
+│   ├── hooks_cli.py         # 🆕 CLI de gerenciamento de hooks (v1.3.0)
 │   ├── config_manager.py    # Gerenciador de configurações
+│   ├── cache.py            # Sistema de cache SQLite
 │   ├── version.py           # Sistema de versionamento centralizado
 │   └── logger.py            # Sistema de logging
-├── tests/                   # 🆕 Testes automatizados
-│   └── test_git_handler.py  # Testes do GitHandler
+├── tests/                   # Testes automatizados
+│   ├── test_git_handler.py  # Testes do GitHandler
+│   └── test_git_hooks.py    # 🆕 Testes do sistema de hooks (v1.3.0)
 ├── requirements.txt         # Dependências de produção
-├── requirements-dev.txt     # 🆕 Dependências de desenvolvimento
+├── requirements-dev.txt     # Dependências de desenvolvimento
 ├── pyproject.toml          # Configuração do projeto (v1.2.0)
 ├── pytest.ini              # Configuração de testes
 ├── setup-dev.sh            # Script de setup para desenvolvedores
-├── .env.example            # Exemplo de configuração
 ├── demo.py                 # Script de demonstração
-└── CHANGELOG_v1.2.0.md     # 🆕 Changelog da versão atual
+├── demo_hooks.py           # 🆕 Demonstração de Git Hooks (v1.3.0)
+├── .env.example            # Exemplo de configuração
+├── CHANGELOG_v1.3.0.md     # 🆕 Changelog da versão atual
 ├── LICENSE                 # Licença MIT
 └── README.md               # Este arquivo
 ```
@@ -343,36 +429,22 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 - [x] **CLI aprimorado** - Modo verbose, cache-stats, validação robusta
 - [x] **Cache management CLI** - Ferramentas para gerenciar cache
 
-### 🚀 v1.3.0 (Em planejamento - Q4 2025)
-- [ ] **Git Hooks automáticos**
-  - [ ] pre-commit hook para geração automática
-  - [ ] commit-msg hook para validação
+### 🚀 v1.3.0 - Interface e Automação (Em desenvolvimento)
+- [x] **Git Hooks automáticos**
+  - [x] Pre-commit hook para análise automática
+  - [x] Commit-msg hook para validação e melhoria
+  - [x] Post-commit hook para analytics
+- [x] **CLI de gerenciamento de hooks**
+  - [x] Instalação/desinstalação de hooks
+  - [x] Configuração e testes de hooks
+  - [x] Sistema de saúde e logs
 - [ ] **Interface gráfica (GUI)**
   - [ ] Aplicativo desktop com Tkinter/PyQt
   - [ ] Preview visual de mudanças
-- [ ] **Análise de padrões históricos**
-  - [ ] Aprendizado baseado em commits anteriores
-  - [ ] Sugestões personalizadas por projeto
-  - [ ] Ollama local (llama3, codellama, mistral)
-  - [ ] Cohere Command
-- [ ] **Templates de commit personalizáveis**
-  - [ ] Sistema de templates com variáveis
-  - [ ] Templates por tipo de projeto (feat, fix, docs, etc.)
-  - [ ] Import/export de templates
-- [ ] **Integração avançada com Git**
-  - [ ] Git hooks automáticos (pre-commit, commit-msg)
-  - [ ] Análise de branch e contexto do PR
-  - [ ] Sugestões baseadas em histórico de commits
-
-### 🎨 v1.3.0 (Q1 2026)
-- [ ] **Interface e UX melhorados**
-  - [ ] TUI (Terminal UI) interativa com seleção visual
+- [ ] **TUI (Terminal UI) interativa**
+  - [ ] Interface de seleção visual
   - [ ] Preview com syntax highlighting
   - [ ] Wizard de configuração inicial
-- [ ] **Análise de código aprimorada**
-  - [ ] Detecção de linguagem de programação
-  - [ ] Context awareness por tipo de arquivo
-  - [ ] Análise de dependências modificadas
 
 ### 🔧 v1.4.0 (Q2 2026)
 - [ ] **Integração com ferramentas de desenvolvimento**

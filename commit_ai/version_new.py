@@ -2,10 +2,10 @@
 """Sistema de controle de versão do Commit-AI"""
 
 # Versão atual do projeto
-VERSION = "1.3.0"
+VERSION = "1.2.0"
 VERSION_DATE = "17/08/2025"
-VERSION_NAME = "Interface e Automação" 
-VERSION_INFO = "Git hooks automáticos, interface aprimorada e automação avançada"
+VERSION_NAME = "Providers & Templates" 
+VERSION_INFO = "Sistema completo de múltiplos provedores AI e templates personalizados"
 
 # Status das funcionalidades por versão (usando texto simples para compatibilidade)
 FEATURES_STATUS = {
@@ -37,19 +37,10 @@ FEATURES_STATUS = {
         "git_hooks": "[PLAN] Planejado"
     },
     "1.3.0": {
-        "git_hooks": "[DEV] Em desenvolvimento",
-        "pre_commit_hook": "[DEV] Em desenvolvimento",
-        "commit_msg_hook": "[DEV] Em desenvolvimento",
-        "enhanced_tui": "[PLAN] Planejado",
+        "tui_interface": "[PLAN] Planejado",
         "syntax_highlighting": "[PLAN] Planejado",
-        "interactive_staging": "[PLAN] Planejado",
-        "commit_templates_ui": "[PLAN] Planejado",
+        "code_analysis": "[PLAN] Planejado",
         "config_wizard": "[PLAN] Planejado"
-    },
-    "1.4.0": {
-        "vscode_extension": "[PLAN] Planejado",
-        "jetbrains_plugin": "[PLAN] Planejado",
-        "github_cli_integration": "[PLAN] Planejado"
     }
 }
 

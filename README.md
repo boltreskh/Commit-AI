@@ -1,6 +1,6 @@
 # Commit-AI 🤖
 
-Um assistente de linha de comando (CLI) inteligente que gera mensagens de commit para o Git usando Inteligência Artificial.
+**v1.1.0** | Um assistente de linha de comando (CLI) inteligente que gera mensagens de commit para o Git usando Inteligência Artificial.
 
 ## 📋 Sobre o Projeto
 
@@ -14,6 +14,9 @@ O **Commit-AI** analisa suas alterações de código (via `git diff`) e utiliza 
 - 👀 **Modo Preview**: Visualize a mensagem antes de fazer o commit
 - ⚡ **Modo Automático**: Commit automático sem confirmação
 - 🛠️ **Configurável**: Personalize modelo, temperatura e outros parâmetros
+- 💾 **Configurações Persistentes**: Sistema de configuração que lembra suas preferências
+- 📝 **Logging Avançado**: Sistema de logs estruturado para debug e análise
+- 🧪 **Testes Automatizados**: Suite completa de testes para garantir qualidade
 
 ## 🚀 Instalação
 
@@ -50,8 +53,14 @@ source .venv/bin/activate
 
 ### 4. Instale as dependências
 
+**Para uso básico:**
 ```bash
 pip install -r requirements.txt
+```
+
+**Para desenvolvimento:**
+```bash
+pip install -r requirements-dev.txt
 ```
 
 ### 5. Configure a API Key
@@ -159,27 +168,127 @@ python -m commit_ai.main --auto --temperature 0.5 --max-tokens 80
 ```
 Commit-AI/
 ├── commit_ai/
-│   ├── __init__.py          # Inicialização do pacote
+│   ├── __init__.py          # Inicialização do pacote (v1.1.0)
 │   ├── main.py              # Ponto de entrada principal
 │   ├── git_handler.py       # Operações do Git
-│   └── ai_service.py        # Integração com APIs de IA
-├── requirements.txt         # Dependências
-├── pyproject.toml          # Configuração do projeto
+│   ├── ai_service.py        # Integração com APIs de IA
+│   ├── config_manager.py    # 🆕 Gerenciador de configurações
+│   └── logger.py            # 🆕 Sistema de logging
+├── tests/                   # 🆕 Testes automatizados
+│   └── test_git_handler.py  # Testes do GitHandler
+├── requirements.txt         # Dependências de produção
+├── requirements-dev.txt     # 🆕 Dependências de desenvolvimento
+├── pyproject.toml          # Configuração do projeto (v1.1.0)
+├── pytest.ini              # 🆕 Configuração de testes
+├── setup-dev.sh            # 🆕 Script de setup para desenvolvedores
 ├── .env.example            # Exemplo de configuração
+├── demo.py                 # Script de demonstração
+├── LICENSE                 # Licença MIT
 └── README.md               # Este arquivo
 ```
 
-## 🤝 Contribuindo
+## � Desenvolvimento e Testes
+
+### Configuração para Desenvolvedores
+
+```bash
+# Configuração automática (Linux/Mac)
+./setup-dev.sh
+
+# Configuração manual (Windows)
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements-dev.txt
+pip install -e .
+```
+
+### Executando Testes
+
+```bash
+# Executar todos os testes
+pytest
+
+# Executar com cobertura
+pytest --cov=commit_ai
+
+# Executar testes específicos
+pytest tests/test_git_handler.py
+
+# Executar com verbose
+pytest -v
+```
+
+### Formatação e Qualidade de Código
+
+```bash
+# Formatar código
+black commit_ai/
+
+# Verificar tipos
+mypy commit_ai/
+
+# Verificar estilo
+flake8 commit_ai/
+```
+
+## 🔧 Configurações Avançadas
+
+### Sistema de Configuração Persistente
+
+O Commit-AI agora salva suas preferências em `~/.commit-ai/config.json`:
+
+```json
+{
+  "default_api": "openai",
+  "default_model": "gpt-4",
+  "temperature": 0.3,
+  "max_tokens": 100,
+  "commit_types": ["feat", "fix", "docs", "style", "refactor", "test", "chore"]
+}
+```
+
+### Sistema de Logs
+
+Os logs são salvos automaticamente em `~/.commit-ai/logs/commit-ai.log`:
+
+- **Console**: Mensagens INFO e superiores
+- **Arquivo**: Todas as mensagens (DEBUG+)
+- **Configurável**: Via código ou environment variables
 
 Contribuições são bem-vindas! Para contribuir:
 
 1. Fork o projeto
 2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças usando o próprio Commit-AI! 😉
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+3. Configure o ambiente de desenvolvimento (`./setup-dev.sh` ou manual)
+4. Faça suas alterações e adicione testes se necessário
+5. Execute os testes (`pytest`)
+6. Formate o código (`black commit_ai/`)
+7. Commit suas mudanças usando o próprio Commit-AI! 😉
+8. Push para a branch (`git push origin feature/AmazingFeature`)
+9. Abra um Pull Request
 
 **Desenvolvido por:** boltreskh (lucascanluiz@gmail.com)
+
+## 📈 Changelog
+
+### v1.1.0 (17/08/2025)
+- ✨ **NOVO**: Sistema de configuração persistente (`config_manager.py`)
+- ✨ **NOVO**: Sistema de logging estruturado (`logger.py`)
+- ✨ **NOVO**: Suite de testes automatizados com pytest
+- ✨ **NOVO**: Dependências de desenvolvimento (`requirements-dev.txt`)
+- ✨ **NOVO**: Script de setup para desenvolvedores (`setup-dev.sh`)
+- ✨ **NOVO**: Configuração de testes com cobertura (`pytest.ini`)
+- 📚 **MELHORIA**: Documentação expandida com seções de desenvolvimento
+- 🔧 **MELHORIA**: Estrutura de projeto mais organizada
+
+### v1.0.0 (17/08/2025)
+- 🎉 **LANÇAMENTO**: Versão inicial do Commit-AI
+- 🤖 Geração de commits com OpenAI GPT e Google Gemini
+- 👀 Modo preview e commit automático
+- 🛠️ Interface CLI completa com Click
+- 📝 Documentação abrangente
+
+## 🤝 Contribuindo
 
 ## 📝 Licença
 
@@ -190,6 +299,20 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 - Mensagens muito longas são truncadas em 72 caracteres
 - Requer conexão com internet para acessar as APIs
 - APIs têm limites de uso que podem afetar a funcionalidade
+
+## 🎯 Roadmap
+
+### v1.2.0 (Próxima versão)
+- [ ] Sistema de cache para respostas da IA
+- [ ] Suporte para mais provedores (Claude, Ollama)
+- [ ] Templates de commit personalizáveis
+- [ ] Integração com hooks do Git
+
+### v2.0.0 (Futuro)
+- [ ] Interface gráfica opcional
+- [ ] Análise semântica avançada do código
+- [ ] Integração com CI/CD
+- [ ] Plugin para VS Code
 
 ## 📞 Suporte
 

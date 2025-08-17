@@ -4,14 +4,14 @@ Sistema de controle de versão do Commit-AI
 Mantém sincronizadas as versões em todos os arquivos do projeto
 """
 
-VERSION = "1.1.0"
+VERSION = "1.2.0"
 VERSION_DATE = "2025-08-17"
-VERSION_NAME = "Cache & Config"
+VERSION_NAME = "Providers & Templates"
 
 # Metadata da versão
 VERSION_INFO = {
     "major": 1,
-    "minor": 1, 
+    "minor": 2, 
     "patch": 0,
     "pre_release": None,
     "build": None
@@ -34,10 +34,17 @@ FEATURES_STATUS = {
         "robust_validation": "✅ Completo"
     },
     "1.2.0": {
-        "claude_support": "🔄 Em planejamento",
-        "ollama_support": "🔄 Em planejamento",
-        "custom_templates": "🔄 Em planejamento",
-        "git_hooks": "🔄 Em planejamento"
+        "claude_support": "� Em desenvolvimento",
+        "ollama_support": "� Em desenvolvimento",
+        "custom_templates": "� Em desenvolvimento",
+        "git_hooks": "📋 Planejado",
+        "enhanced_prompts": "� Em desenvolvimento"
+    },
+    "1.3.0": {
+        "tui_interface": "📋 Planejado",
+        "syntax_highlighting": "📋 Planejado",
+        "code_analysis": "📋 Planejado",
+        "config_wizard": "📋 Planejado"
     }
 }
 

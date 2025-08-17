@@ -15,6 +15,7 @@ from .git_handler import GitHandler
 from .ai_service import AIService
 from .config_manager import ConfigManager
 from .logger import logger
+from .template_cli import template_cli
 
 # Carrega variáveis de ambiente do arquivo .env
 load_dotenv()
@@ -22,14 +23,22 @@ load_dotenv()
 # Inicializa o gerenciador de configurações
 config_manager = ConfigManager()
 
-@click.command()
+@click.group(invoke_without_command=True)
+@click.pass_context
+def cli(ctx):
+    """🤖 Commit-AI: Gerador de mensagens de commit usando IA"""
+    if ctx.invoked_subcommand is None:
+        # Se nenhum subcomando foi chamado, executa a funcionalidade principal
+        ctx.invoke(commit)
+
+@cli.command()
 @click.option('--api', 
-              type=click.Choice(['openai', 'gemini'], case_sensitive=False),
+              type=click.Choice(['openai', 'gemini', 'claude', 'ollama'], case_sensitive=False),
               default=lambda: config_manager.get('default_api', 'openai'),
               help='Serviço de IA a ser usado')
 @click.option('--model',
               default=lambda: config_manager.get('default_model', None),
-              help='Modelo específico a ser usado (ex: gpt-4, gemini-pro)')
+              help='Modelo específico a ser usado (ex: gpt-4, gemini-pro, claude-3-sonnet)')
 @click.option('--max-tokens',
               default=lambda: config_manager.get('max_tokens', 100),
               help='Número máximo de tokens para a resposta')
@@ -55,7 +64,10 @@ config_manager = ConfigManager()
 @click.option('--cache-stats',
               is_flag=True,
               help='Mostrar estatísticas do cache')
-def main(api, model, max_tokens, temperature, preview, auto, verbose, no_cache, config, cache_stats):
+@click.option('--list-providers',
+              is_flag=True,
+              help='Listar providers de IA disponíveis')
+def commit(api, model, max_tokens, temperature, preview, auto, verbose, no_cache, config, cache_stats, list_providers):
     """
     🤖 Commit-AI - Gerador inteligente de mensagens de commit
     
@@ -63,7 +75,9 @@ def main(api, model, max_tokens, temperature, preview, auto, verbose, no_cache, 
     
     Exemplos de uso:
         commit-ai                           # Usar configurações padrão
-        commit-ai --api gemini              # Usar Google Gemini
+        commit-ai --api claude              # Usar Anthropic Claude
+        commit-ai --api ollama              # Usar Ollama local
+        commit-ai --list-providers          # Ver providers disponíveis
         commit-ai --preview                 # Apenas visualizar a mensagem
         commit-ai --auto                    # Commit automático
         commit-ai --config api=gemini       # Definir configuração padrão
@@ -77,6 +91,33 @@ def main(api, model, max_tokens, temperature, preview, auto, verbose, no_cache, 
         if verbose:
             logger.set_level('DEBUG')
             logger.debug("Modo verbose ativado")
+        
+        # Listar providers disponíveis se solicitado
+        if list_providers:
+            from .ai_service import AIService
+            providers = AIService.get_supported_providers()
+            
+            click.echo(click.style("🤖 Providers de IA Disponíveis:", fg='cyan', bold=True))
+            click.echo()
+            
+            for provider, info in providers.items():
+                available = AIService.is_provider_available(provider)
+                status = "✅ Disponível" if available else "❌ Não disponível"
+                
+                click.echo(f"  {provider.upper()}: {info['name']}")
+                click.echo(f"    Status: {status}")
+                click.echo(f"    Modelos: {', '.join(info['models'])}")
+                click.echo(f"    Padrão: {info['default_model']}")
+                
+                if not available:
+                    if provider == 'claude':
+                        click.echo(f"    📦 Instalar: pip install anthropic")
+                        click.echo(f"    🔑 API Key: ANTHROPIC_API_KEY")
+                    elif provider == 'ollama':
+                        click.echo(f"    📦 Instalar: pip install ollama")
+                        click.echo(f"    🚀 Executar: ollama serve")
+                click.echo()
+            return
         
         # Mostrar estatísticas do cache se solicitado
         if cache_stats:
@@ -256,6 +297,13 @@ def main(api, model, max_tokens, temperature, preview, auto, verbose, no_cache, 
             click.echo(click.style(f"\n🔍 Para mais detalhes, verifique os logs em: ~/.commit-ai/logs/", fg='yellow'))
         sys.exit(1)
 
+
+# Adiciona o CLI de templates como subgrupo
+cli.add_command(template_cli, name='template')
+
+# Função main para compatibilidade
+def main():
+    cli()
 
 if __name__ == '__main__':
     main()

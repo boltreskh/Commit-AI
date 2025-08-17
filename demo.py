@@ -2,7 +2,7 @@
 """
 Commit-AI - Script de Demonstração
 
-Autor: boltreskh (lucascanluz@gmail.com)
+Autor: boltreskh (lucascanluiz@gmail.com)
 Este script demonstra as funcionalidades do Commit-AI.
 """
 

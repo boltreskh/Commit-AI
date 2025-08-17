@@ -4,7 +4,7 @@
 Um assistente CLI que gera mensagens de commit para o Git usando IA.
 
 ## Autor
-**boltreskh** (lucascanluz@gmail.com)
+**boltreskh** (lucascanluiz@gmail.com)
 
 ## Status do Projeto
 ✅ PROJETO COMPLETAMENTE CONFIGURADO E FUNCIONAL

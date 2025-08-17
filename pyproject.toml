@@ -7,7 +7,7 @@ name = "commit-ai"
 version = "1.0.0"
 description = "Um assistente CLI que gera mensagens de commit para o Git usando Inteligência Artificial"
 authors = [
-    {name = "boltreskh", email = "lucascanluz@gmail.com"}
+    {name = "boltreskh", email = "lucascanluiz@gmail.com"}
 ]
 readme = "README.md"
 license = {text = "MIT"}

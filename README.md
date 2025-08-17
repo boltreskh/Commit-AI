@@ -179,7 +179,7 @@ Contribuições são bem-vindas! Para contribuir:
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
 
-**Desenvolvido por:** boltreskh (lucascanluz@gmail.com)
+**Desenvolvido por:** boltreskh (lucascanluiz@gmail.com)
 
 ## 📝 Licença
 
@@ -202,4 +202,4 @@ Se encontrar problemas ou tiver sugestões:
 
 **Desenvolvido com ❤️ e IA por boltreskh para desenvolvedores que querem commits melhores!**
 
-📧 Contato: lucascanluz@gmail.com
+📧 Contato: lucascanluiz@gmail.com

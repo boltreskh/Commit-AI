@@ -9,13 +9,15 @@ import os
 import re
 from typing import Optional
 import requests
+from .logger import logger
+from .cache import CommitCache
 
 
 class AIService:
     """Classe para gerenciar integrações com serviços de IA"""
     
     def __init__(self, provider: str = 'openai', model: Optional[str] = None, 
-                 max_tokens: int = 100, temperature: float = 0.3):
+                 max_tokens: int = 100, temperature: float = 0.3, use_cache: bool = True):
         """
         Inicializa o serviço de IA
         
@@ -24,10 +26,20 @@ class AIService:
             model: Modelo específico a usar (opcional)
             max_tokens: Número máximo de tokens na resposta
             temperature: Criatividade da resposta (0.0-1.0)
+            use_cache: Se deve usar cache (padrão: True)
         """
         self.provider = provider.lower()
         self.max_tokens = max_tokens
         self.temperature = temperature
+        self.use_cache = use_cache
+        
+        logger.debug(f"Inicializando AIService: provider={provider}, max_tokens={max_tokens}, temperature={temperature}, cache={use_cache}")
+        
+        # Inicializar cache se habilitado
+        if self.use_cache:
+            self.cache = CommitCache()
+        else:
+            self.cache = None
         
         # Configurar modelo padrão se não especificado
         if model is None:
@@ -36,12 +48,19 @@ class AIService:
             elif self.provider == 'gemini':
                 self.model = 'gemini-pro'
             else:
+                logger.error(f"Provedor não suportado: {provider}")
                 raise ValueError(f"Provedor não suportado: {provider}")
         else:
             self.model = model
         
+        logger.info(f"Modelo configurado: {self.model}")
+        
         # Configurar API key
         self.api_key = self._get_api_key()
+        if self.api_key:
+            logger.debug(f"API key encontrada para {self.provider}")
+        else:
+            logger.warning(f"API key não encontrada para {self.provider}")
     
     def _get_api_key(self) -> Optional[str]:
         """
@@ -238,17 +257,49 @@ MENSAGEM DE COMMIT:"""
         Raises:
             Exception: Se a geração falhar
         """
+        logger.info(f"Gerando commit message com {self.provider} ({self.model})")
+        
         if not self.is_configured():
+            logger.error(f"API key para {self.provider} não configurada")
             raise Exception(f"API key para {self.provider} não configurada")
         
         if not diff_text.strip():
+            logger.error("Diff vazio fornecido")
             raise Exception("Nenhuma alteração encontrada para analisar")
         
-        prompt = self._create_prompt(diff_text)
+        logger.debug(f"Tamanho do diff: {len(diff_text)} caracteres")
         
-        if self.provider == 'openai':
-            return self._call_openai_api(prompt)
-        elif self.provider == 'gemini':
-            return self._call_gemini_api(prompt)
-        else:
-            raise Exception(f"Provedor não suportado: {self.provider}")
+        # Verificar cache primeiro (se habilitado)
+        if self.cache:
+            cached_result = self.cache.get(
+                diff_text, self.provider, self.model, 
+                self.temperature, self.max_tokens
+            )
+            if cached_result:
+                logger.info("Usando resposta do cache")
+                return cached_result
+        
+        prompt = self._create_prompt(diff_text)
+        logger.debug("Prompt criado com sucesso")
+        
+        try:
+            if self.provider == 'openai':
+                result = self._call_openai_api(prompt)
+            elif self.provider == 'gemini':
+                result = self._call_gemini_api(prompt)
+            else:
+                raise Exception(f"Provedor não suportado: {self.provider}")
+            
+            # Armazenar no cache (se habilitado)
+            if self.cache:
+                self.cache.set(
+                    diff_text, self.provider, self.model,
+                    self.temperature, self.max_tokens, result
+                )
+            
+            logger.info(f"Commit message gerada com sucesso: '{result}'")
+            return result
+            
+        except Exception as e:
+            logger.error(f"Erro na geração da mensagem: {str(e)}")
+            raise

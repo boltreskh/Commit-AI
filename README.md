@@ -1,22 +1,22 @@
-# Commit-AI 🤖
+# 🤖 Commit-AI v1.1.0
 
-**v1.1.0** | Um assistente de linha de comando (CLI) inteligente que gera mensagens de commit para o Git usando Inteligência Artificial.
-
-## 📋 Sobre o Projeto
-
-O **Commit-AI** analisa suas alterações de código (via `git diff`) e utiliza APIs de IA (OpenAI GPT ou Google Gemini) para gerar mensagens de commit profissionais, concisas e descritivas automaticamente.
+Um gerador inteligente de mensagens de commit Git usando IA (OpenAI GPT & Google Gemini).
 
 ## ✨ Funcionalidades
 
-- 🤖 **Geração Inteligente**: Usa IA para criar mensagens de commit baseadas nas alterações do código
-- 🔄 **Múltiplos Provedores**: Suporte para OpenAI GPT e Google Gemini
-- 🎯 **Formato Convencional**: Segue padrões de commit convencionais
-- 👀 **Modo Preview**: Visualize a mensagem antes de fazer o commit
-- ⚡ **Modo Automático**: Commit automático sem confirmação
-- 🛠️ **Configurável**: Personalize modelo, temperatura e outros parâmetros
-- 💾 **Configurações Persistentes**: Sistema de configuração que lembra suas preferências
-- 📝 **Logging Avançado**: Sistema de logs estruturado para debug e análise
-- 🧪 **Testes Automatizados**: Suite completa de testes para garantir qualidade
+### Principais
+- **Geração automática de commits**: Analisa suas mudanças e gera mensagens profissionais
+- **Multi-provider IA**: Suporte para OpenAI GPT e Google Gemini
+- **Sistema de cache inteligente**: Evita requisições desnecessárias à IA
+- **Configuração persistente**: Salva suas preferências automaticamente
+- **Logs estruturados**: Sistema de logging completo para debug
+
+### Avançadas v1.1.0
+- **Sistema de configuração**: Configure suas preferências padrão
+- **Cache SQLite**: Cache inteligente com controle de expiração
+- **Modo verboso**: Debug detalhado de operações
+- **Estatísticas de cache**: Visualize métricas de uso do cache
+- **Validação robusta**: Verificação de parâmetros e API keys
 
 ## 🚀 Instalação
 

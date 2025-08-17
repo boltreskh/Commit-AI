@@ -31,6 +31,7 @@ dependencies = [
 
 [project.scripts]
 commit-ai = "commit_ai.main:main"
+commit-ai-cache = "commit_ai.cache_cli:cache_cli"
 
 [tool.setuptools.packages.find]
 where = ["."]

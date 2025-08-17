@@ -34,7 +34,13 @@ class TestGitHandler:
         os.chdir(self.original_cwd)
         # Remove diretório temporário
         import shutil
-        shutil.rmtree(self.temp_dir)
+        import stat
+        
+        def handle_remove_readonly(func, path, exc):
+            os.chmod(path, stat.S_IWRITE)
+            func(path)
+            
+        shutil.rmtree(self.temp_dir, onerror=handle_remove_readonly)
     
     def test_is_git_repo_true(self):
         """Testa detecção de repositório Git válido"""
